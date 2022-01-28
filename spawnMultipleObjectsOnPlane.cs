@@ -15,7 +15,7 @@ public class spawnMultipleObjectsOnPlane : MonoBehaviour
   private GameObject spawnObject;
 
   // >>> ADDED CODE: This variable stores a 'list' of the multiple objects the user will place later
-  private List<GameObject> listOfPlacedPrefab = new List<GameObject>();
+  private List<GameObject> placedPrefabList = new List<GameObject>();
   // <<<
 
   [SerializeField]
@@ -24,7 +24,7 @@ public class spawnMultipleObjectsOnPlane : MonoBehaviour
   private int placedPrefabCount = 0;
 
   [SerializeField]
-  private GameObject placeablePrefab;
+  private GameObject PlaceablePrefab;
 
   static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
@@ -67,11 +67,13 @@ public class spawnMultipleObjectsOnPlane : MonoBehaviour
     if (raycastManager.Raycast(touchPosition, s_Hits, TrackableType.PlaneWithinPolygon))
     {
       var hitPose = s_Hits[0].pose;
+
+      // >>> Then, check if the number of placed object exceeds the maximum number allowed (max number can be set in the code as previously mentioned above)
       if (placedPrefabCount < maxPrefabSpawnCount)
       {
         // >>> Creates a new spawnObject and displays it on the screen where the user touched
-        spawnObject = Instantiate(placeablePrefab, hitPose.position, hitPose.rotation);
-        listOfPlacedPrefab.Add(spawnObject);
+        spawnObject = Instantiate(PlaceablePrefab, hitPose.position, hitPose.rotation);
+        placedPrefabList.Add(spawnObject);
         placedPrefabCount++;
       }
     }
@@ -79,7 +81,7 @@ public class spawnMultipleObjectsOnPlane : MonoBehaviour
 
   public void SetPrefabType(GameObject prefabType)
   {
-    placeablePrefab = prefabType;
+    PlaceablePrefab = prefabType;
   }
 }
 // END OF CODE
