@@ -38,7 +38,7 @@ public class spawnMultipleObjectsOnPlane : MonoBehaviour
   bool TryGetTouchPosition(out Vector2 touchPosition)
 
   {
-    // >>> NOTE: The if statement now is different from the previous
+    // >>> NOTE: This "IF" is different from the previous
     // >>> This if statement will try to detect if a user touches the phone screen
     if (Input.GetTouch(0).phase == TouchPhase.Began)
     {
